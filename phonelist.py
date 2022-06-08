@@ -7,17 +7,16 @@ conn = psycopg2.connect(
            database="phone",
            user="phone",
            password="abc123"
-       )
-
+)
 def read_phonelist(C):
     cur = C.cursor()
     cur.execute("SELECT * FROM phonelist;")
     rows = cur.fetchall()
     cur.close()
     return rows
-def add_phone(C, name, phone):
+def add_phone(C, name, phone, adress):
     cur = C.cursor()
-    cur.execute(f"INSERT INTO phonelist VALUES ('{name}', '{phone}');")
+    cur.execute(f"INSERT INTO phonelist VALUES ('{name}', '{phone}','{adress}');")
     cur.close()
 def delete_phone(C, name):
     cur = C.cursor()
@@ -45,7 +44,8 @@ while True: ## REPL - Read Execute Program Loop
     elif cmd == "ADD":
         name = input("  Name: ")
         phone = input("  Phone: ")
-        add_phone(conn, name, phone)
+        adress = input("  Adress: ")
+        add_phone(conn, name, phone, adress)
     elif cmd == "DELETE":
         name = input("  Name: ")
         delete_phone(conn, name)
