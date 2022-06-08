@@ -37,7 +37,7 @@ while True: ## REPL - Read Execute Program Loop
   delete - delete a contact
   list   - list all phone numbers
   quit   - quit the program''')
-    cmd = input("Command: ")
+    cmd = input("Command: ").upper().strip()
     if cmd == "LIST":
         print(read_phonelist(conn))
     elif cmd == "ADD":
@@ -50,3 +50,5 @@ while True: ## REPL - Read Execute Program Loop
     elif cmd == "QUIT":
         save_phonelist(conn)
         exit()
+    else:
+        print(f'Unknown command:{cmd}')
